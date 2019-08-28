@@ -21,8 +21,10 @@ impl Config {
     fn search<'a>(&self, contents: &'a str) -> Vec<&'a str> {
         let mut results = Vec::new();
 
+        let query = self.query.to_lowercase();
+
         for line in contents.lines() {
-            if line.contains(&self.query) {
+            if line.to_lowercase().contains(&query) {
                 results.push(line)
             }
         }

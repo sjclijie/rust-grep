@@ -5,7 +5,6 @@ use minigrep;
 use minigrep::Config;
 
 fn main() {
-//    let args: Vec<String> = env::args().collect();
 
     let args = env::args();
 

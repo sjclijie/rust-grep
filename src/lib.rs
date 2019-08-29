@@ -24,23 +24,18 @@ impl Config {
     }
 
     fn search<'a>(&self, contents: &'a str) -> Vec<&'a str> {
-        let mut results = Vec::new();
 
         let query = self.query.to_lowercase();
 
-        for line in contents.lines() {
-            if line.to_lowercase().contains(&query) {
-                results.push(line)
-            }
-        }
-
-        results
+        contents.lines()
+            .filter(|line| line.to_lowercase().contains(&query))
+            .collect()
     }
 
     pub fn run(&self) -> Result<(), Box<dyn Error>> {
         let contents = fs::read_to_string(&self.filename)?;
 
-        for ret in self.search(&contents) {
+        for ret in self.search(&contents).iter() {
             println!("{}", ret);
         }
 
